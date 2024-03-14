@@ -1,10 +1,8 @@
 import Link from "next/link";
-import { IconChevronDown, IconMoon, IconSun } from "@tabler/icons-react";
+import { IconMoon, IconSun } from "@tabler/icons-react";
 import { DictionaryData } from "@/types/dictionary";
 import AudioPlayer from "@/components/audio-player";
-import Book from "@/assets/book";
 import { DM_Sans } from "next/font/google";
-import SearchIcon from "@/assets/search";
 import Search from "@/components/search";
 
 const dmSans = DM_Sans({ subsets: ["latin"], weight: "700" });
@@ -106,7 +104,7 @@ export default async function Home({
           </div>
         ))}
         <div className="mb-6">
-          <hr className="w-full" />
+          <div className="w-full h-px bg-base-200" />
           <div className="flex mt-2 text-xs text-gray-500 flex-wrap items-center space-x-2">
             <p className="text-sm">Source:</p>
             {data[0].sourceUrls.map((source, i) => (
