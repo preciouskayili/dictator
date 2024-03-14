@@ -5,6 +5,7 @@ import AudioPlayer from "@/components/audio-player";
 import Book from "@/assets/book";
 import { DM_Sans } from "next/font/google";
 import SearchIcon from "@/assets/search";
+import Search from "@/components/search";
 
 const dmSans = DM_Sans({ subsets: ["latin"], weight: "700" });
 
@@ -15,8 +16,14 @@ async function findWord(word: string): Promise<DictionaryData> {
   return data.json();
 }
 
-export default async function Home() {
-  const data = await findWord("house");
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: {
+    word?: string;
+  };
+}) {
+  const data = await findWord(searchParams?.word || "welcome");
 
   return (
     <>
@@ -42,17 +49,8 @@ export default async function Home() {
           </div>
         </nav>
 
-        <form className="flex w-full h-11 px-4 mb-8 mt-6 rounded-lg justify-between bg-base-200">
-          <input
-            type="text"
-            className="outline-none placeholder:font-normal flex-grow bg-transparent font-bold"
-            placeholder="Search..."
-          />
+        <Search />
 
-          <button className="text-purple-500">
-            <SearchIcon height={18} width={18} />
-          </button>
-        </form>
         <div className="flex w-full justify-between items-center">
           <div>
             <h1 className="font-bold text-5xl">{data[0].word}</h1>
@@ -111,8 +109,8 @@ export default async function Home() {
           <hr className="w-full" />
           <div className="flex mt-2 text-xs text-gray-500 flex-wrap items-center space-x-2">
             <p className="text-sm">Source:</p>
-            {data[0].sourceUrls.map((source) => (
-              <Link href={source} target="_blank">
+            {data[0].sourceUrls.map((source, i) => (
+              <Link key={i} href={source} target="_blank">
                 {source}
               </Link>
             ))}
