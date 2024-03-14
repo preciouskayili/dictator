@@ -55,19 +55,18 @@ export default async function Home() {
             <IconSearch height={16} width={16} />
           </button>
         </form>
+        <div className="flex w-full justify-between items-center">
+          <div>
+            <h1 className="font-bold text-5xl">{data[0].word}</h1>
+            <p className="text-purple-500 text-xl mt-2">
+              {data[0].phonetics[0].text}
+            </p>
+          </div>
+
+          <AudioPlayer url={data[0].phonetics[0].audio} />
+        </div>
         {data.map((wordInfo, i) => (
           <div key={i}>
-            <div className="flex w-full justify-between items-center">
-              <div>
-                <h1 className="font-bold text-5xl">{wordInfo.word}</h1>
-                <p className="text-purple-500 text-xl mt-2">
-                  {wordInfo.phonetics[0].text}
-                </p>
-              </div>
-
-              <AudioPlayer url={wordInfo.phonetics[0].audio} />
-            </div>
-
             {wordInfo.meanings.map((wordMeanings, i) => (
               <div key={i}>
                 <p className="font-bold text-xl mt-4 mb-3">
@@ -91,15 +90,15 @@ export default async function Home() {
                     ))}
                   </ul>
 
-                  <div className="flex flex-wrap space-x-3 mt-2 mb-8">
+                  <div className="flex flex-wrap mt-2 mb-8">
                     {wordMeanings.synonyms.length ? (
-                      <p className="text-gray-500">Synonyms</p>
+                      <p className="text-gray-500 mr-3">Synonyms</p>
                     ) : null}
                     {wordMeanings.synonyms.map((synonym, i) => (
                       <Link
                         key={i}
                         href="/"
-                        className="text-purple-500 font-bold"
+                        className="text-purple-500 mr-3 font-bold"
                       >
                         {synonym}
                       </Link>
@@ -108,15 +107,15 @@ export default async function Home() {
                 </div>
               </div>
             ))}
-            <div className="mb-6">
-              <hr className="w-full" />
-              <div className="flex mt-2 text-xs text-gray-500 flex-wrap items-center space-x-2">
-                <p className="text-sm">Source:</p>
-                <Link href="/">https://en.wikitionary.org/wiki/keyboard</Link>
-              </div>
-            </div>
           </div>
         ))}
+        <div className="mb-6">
+          <hr className="w-full" />
+          <div className="flex mt-2 text-xs text-gray-500 flex-wrap items-center space-x-2">
+            <p className="text-sm">Source:</p>
+            <Link href="/">https://en.wikitionary.org/wiki/keyboard</Link>
+          </div>
+        </div>
       </main>
     </>
   );
