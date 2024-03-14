@@ -4,7 +4,7 @@ import { IconVolume } from "@tabler/icons-react";
 import { useRef } from "react";
 
 export default function AudioPlayer({ url }: { url: string }) {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioRef = useRef(new Audio());
 
   const playSound = (url: string) => {
     if (audioRef.current) {
@@ -19,8 +19,6 @@ export default function AudioPlayer({ url }: { url: string }) {
       className="h-14 w-14 flex items-center justify-center rounded-full bg-purple-500/20 text-purple-500"
     >
       <IconVolume />
-
-      <audio className="hidden" ref={audioRef}></audio>
     </button>
   );
 }

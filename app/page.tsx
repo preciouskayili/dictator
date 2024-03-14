@@ -16,7 +16,7 @@ export async function findWord(word: string): Promise<DictionaryData> {
 }
 
 export default async function Home() {
-  const data = await findWord("school");
+  const data = await findWord("precious");
 
   return (
     <>
@@ -83,7 +83,7 @@ export default async function Home() {
 
                         {definition.example ? (
                           <p className="text-sm mt-2 mb-4 text-gray-500">
-                            "{definition.example}"
+                            {`"${definition.example}"`}
                           </p>
                         ) : null}
                       </li>
