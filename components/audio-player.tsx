@@ -1,10 +1,10 @@
 "use client";
 
-import { IconVolume } from "@tabler/icons-react";
+import Speaker from "@/assets/speaker";
 import { useRef } from "react";
 
 export default function AudioPlayer({ url }: { url: string }) {
-  const audioRef = useRef(new Audio());
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const playSound = (url: string) => {
     if (audioRef.current) {
@@ -18,7 +18,9 @@ export default function AudioPlayer({ url }: { url: string }) {
       onClick={() => playSound(url)}
       className="h-14 w-14 flex items-center justify-center rounded-full bg-purple-500/20 text-purple-500"
     >
-      <IconVolume />
+      <Speaker height={24} width={24} />
+
+      <audio ref={audioRef} className="hidden"></audio>
     </button>
   );
 }

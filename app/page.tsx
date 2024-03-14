@@ -1,12 +1,12 @@
 import Link from "next/link";
-import {
-  IconBook2,
-  IconChevronDown,
-  IconSearch,
-  IconPlayerPlayFilled,
-} from "@tabler/icons-react";
+import { IconChevronDown, IconMoon, IconSun } from "@tabler/icons-react";
 import { DictionaryData } from "@/types/dictionary";
 import AudioPlayer from "@/components/audio-player";
+import Book from "@/assets/book";
+import { DM_Sans } from "next/font/google";
+import SearchIcon from "@/assets/search";
+
+const dmSans = DM_Sans({ subsets: ["latin"], weight: "700" });
 
 async function findWord(word: string): Promise<DictionaryData> {
   const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
@@ -16,31 +16,31 @@ async function findWord(word: string): Promise<DictionaryData> {
 }
 
 export default async function Home() {
-  const data = await findWord("precious");
+  const data = await findWord("house");
 
   return (
     <>
       <main className="max-w-xl mx-auto">
         <nav className="flex justify-between mt-4 items-center">
-          <Link href="/">
-            <IconBook2 height={36} width={36} />
+          <Link
+            className={`${dmSans.className} text-purple-500 font-extrabold text-xl`}
+            href="/"
+          >
+            dictionary
           </Link>
 
           <div className="flex space-x-2">
-            <button className="font-medium flex items-center space-x-1">
-              <span>Serif</span>
-              <span>
-                <IconChevronDown
-                  className="text-purple-500"
-                  height={14}
-                  width={14}
-                />
-              </span>
-            </button>
-
-            {/* <div>
-              <input type="checkbox" className="toggle" defaultChecked />
-            </div> */}
+            <label className="swap swap-rotate">
+              {/* this hidden checkbox controls the state */}
+              <input
+                type="checkbox"
+                className="theme-controller"
+                value="dark"
+              />
+              <IconMoon className="swap-off text-gray-500" />
+              <IconSun className="swap-on" color="#FFD700" />
+            </label>
+            {/* <input className="font-medium flex items-center space-x-1"></input> */}
           </div>
         </nav>
 
@@ -52,7 +52,7 @@ export default async function Home() {
           />
 
           <button className="text-purple-500">
-            <IconSearch height={16} width={16} />
+            <SearchIcon height={18} width={18} />
           </button>
         </form>
         <div className="flex w-full justify-between items-center">
@@ -113,7 +113,11 @@ export default async function Home() {
           <hr className="w-full" />
           <div className="flex mt-2 text-xs text-gray-500 flex-wrap items-center space-x-2">
             <p className="text-sm">Source:</p>
-            <Link href="/">https://en.wikitionary.org/wiki/keyboard</Link>
+            {data[0].sourceUrls.map((source) => (
+              <Link href={source} target="_blank">
+                {source}
+              </Link>
+            ))}
           </div>
         </div>
       </main>
