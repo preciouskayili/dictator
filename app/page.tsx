@@ -35,7 +35,7 @@ export default async function Home() {
               <input
                 type="checkbox"
                 className="theme-controller"
-                value="dark"
+                value="light"
               />
               <IconMoon className="swap-off text-gray-500" />
               <IconSun className="swap-on" color="#FFD700" />
