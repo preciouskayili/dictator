@@ -31,7 +31,6 @@ export default async function Home() {
 
           <div className="flex space-x-2">
             <label className="swap swap-rotate">
-              {/* this hidden checkbox controls the state */}
               <input
                 type="checkbox"
                 className="theme-controller"
@@ -40,11 +39,10 @@ export default async function Home() {
               <IconMoon className="swap-off text-gray-500" />
               <IconSun className="swap-on" color="#FFD700" />
             </label>
-            {/* <input className="font-medium flex items-center space-x-1"></input> */}
           </div>
         </nav>
 
-        <form className="flex w-full h-11 px-4 mb-8 mt-6 rounded-lg justify-between bg-neutral-200">
+        <form className="flex w-full h-11 px-4 mb-8 mt-6 rounded-lg justify-between bg-base-200">
           <input
             type="text"
             className="outline-none placeholder:font-normal flex-grow bg-transparent font-bold"
