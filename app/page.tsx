@@ -8,7 +8,7 @@ import {
 import { DictionaryData } from "@/types/dictionary";
 import AudioPlayer from "@/components/audio-player";
 
-export async function findWord(word: string): Promise<DictionaryData> {
+async function findWord(word: string): Promise<DictionaryData> {
   const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
 
   const data = await fetch(url);
