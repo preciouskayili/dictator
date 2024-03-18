@@ -2,7 +2,7 @@
 
 import SearchIcon from "@/assets/search";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function Search() {
   const searchParams = useSearchParams();
@@ -10,7 +10,9 @@ export default function Search() {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const handleSearch = () => {
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const params = new URLSearchParams({ word: searchValue });
 
     if (searchValue.trim() === "") {
@@ -24,7 +26,7 @@ export default function Search() {
 
   return (
     <form
-      onSubmit={() => handleSearch()}
+      onSubmit={(e) => handleSearch(e)}
       className="flex w-full h-11 px-4 mb-8 mt-6 rounded-lg justify-between bg-base-200"
     >
       <input
